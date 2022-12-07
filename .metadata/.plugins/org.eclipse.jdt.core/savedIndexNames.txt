@@ -1,0 +1,20 @@
+INDEX VERSION 1.131+C:\KOSA_P\StudySpring\.metadata\.plugins\org.eclipse.jdt.core
+372474866.index
+2398601595.index
+2822047256.index
+704586754.index
+2855064010.index
+4001213957.index
+2716597638.index
+384013144.index
+3062447685.index
+2541684655.index
+114888753.index
+3429988612.index
+841293996.index
+2747268708.index
+3643296774.index
+901880277.index
+2213824396.index
+1249189335.index
+3166052004.index
