@@ -35,7 +35,7 @@ public class LogAdvice {
 	}
 
 	@Around("execution(* org.zerock.service.SampleService*.*(..))")
-	public Object logTime(ProceedingJoinPoint pjp) {
+	public Object logTime(ProceedingJoinPoint pjp) throws Throwable {
 		long start = System.currentTimeMillis();
 
 		log.info("Target: " + pjp.getTarget());
@@ -43,12 +43,8 @@ public class LogAdvice {
 
 		// invoke method
 		Object result = null;
-
-		try {
-			result = pjp.proceed();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+		
+		result = pjp.proceed();
 
 		long end = System.currentTimeMillis();
 
