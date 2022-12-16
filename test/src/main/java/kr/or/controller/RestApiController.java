@@ -28,7 +28,7 @@ public class RestApiController {
         System.out.println("--------------- @PostMapping ---------------");
 //        System.out.println("post method");
 //        System.out.println("user: " + user);
-        //나는 park1
+        //나는 park22222
         return userDto;
     }
 }
