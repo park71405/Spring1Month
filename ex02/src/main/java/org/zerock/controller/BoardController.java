@@ -28,6 +28,12 @@ public class BoardController {
 		model.addAttribute("list", service.getList());
 	}
 	
+	//게시품 등록
+	@GetMapping("/register") 
+	public void register() {
+		
+	}
+	//게시물 등록
 	@PostMapping("/register")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		log.info("register: " + board);
@@ -38,22 +44,29 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
-	
+	//페이지 조회
 	@GetMapping("/get")
 	public void get(@RequestParam("bno") Long bno, Model model) {
-		log.info("/get");
+		log.info("/get or modify");
 		
 		model.addAttribute("board", service.get(bno));
 	}
 	
+	@GetMapping("/modify")
+	public void modify(@RequestParam("bno") Long bno, Model model) {
+	log.info("/get or modify");
+		
+		model.addAttribute("board", service.get(bno));
+	}
+	
+	//게시글 수정
 	@PostMapping("/modify")
 	public String modify(BoardVO board, RedirectAttributes rttr) {
-		log.info("modify: " + board);
-		
-		if(service.modify(board)) {
-			rttr.addFlashAttribute("result" + "success");
+		log.info("modify:" + board);
+	
+		if (service.modify(board)) {
+				rttr.addFlashAttribute("result", "success");
 		}
-		
 		return "redirect:/board/list";
 	}
 	
