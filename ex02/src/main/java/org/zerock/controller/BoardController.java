@@ -16,7 +16,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/board/*")
-@AllArgsConstructor //생성자 생성 만들고 자동으로 주입 , 생성자를 만들지 않을 경우 @Setter(onMethod_ = { @Autowired })
+@AllArgsConstructor
 public class BoardController {
 
 	private BoardService service;
@@ -41,8 +41,8 @@ public class BoardController {
 	
 	@GetMapping("/get")
 	public void get(@RequestParam("bno") Long bno, Model model) {
-		
 		log.info("/get");
+		
 		model.addAttribute("board", service.get(bno));
 	}
 	
@@ -51,7 +51,7 @@ public class BoardController {
 		log.info("modify: " + board);
 		
 		if(service.modify(board)) {
-			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("result" + "success");
 		}
 		
 		return "redirect:/board/list";
@@ -59,12 +59,13 @@ public class BoardController {
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+		log.info("remove: " + bno);
 		
-		log.info("remove...." + bno);
 		if(service.remove(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
 		return "redirect:/board/list";
 	}
+	
 }
