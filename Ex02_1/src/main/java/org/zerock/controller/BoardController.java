@@ -65,10 +65,7 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "sucess");
 		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:/board/list";
+		return "redirect:/board/list" + cri.getListLink();
 	}
 	
 	//삭제 처리
@@ -79,10 +76,7 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:/board/list"; //목록으로 이동
+		return "redirect:/board/list" + cri.getListLink(); //목록으로 이동
 	}
 	
 }

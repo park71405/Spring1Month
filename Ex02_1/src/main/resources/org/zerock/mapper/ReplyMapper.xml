@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.ReplyMapper"> 
+
+	<!-- 댓글 등록 -->
+	<insert id="insert">
+		insert into tbl_reply (rno, bno, reply, replyer)
+		values (seq_reply.nextval, #{bno}, #{reply}, #{replyer})
+	</insert>
+	
+	<!-- 댓글 조회 -->
+	<select id="read" resultType="org.zerock.domain.ReplyVO">
+		select * from tbl_reply where rno = #{rno}
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete">
+		delete from tbl_replly where rno = #{rno}
+	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="update">
+		update tbl_reply set reply = #{resply}, datedate = sysdate
+		where rno = #{rno}
+	</update>
+	
+	<!-- 댓글 목록 페이징 처리 -->
+	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
+		select rno, bno, reply, replyer, replyDate, updatedate
+		from tbl_reply
+		where bno = #{bno}
+		order by rno asc
+	</select>
+
+</mapper>

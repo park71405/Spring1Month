@@ -71,9 +71,31 @@
 
 				<!-- 페이지 클릭하면 동작하는 부분 -->
 				<form id='actionForm' action="/board/list" method='get'>
-					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'> 
+					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 					<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-				</form>
+					<input type="hidden" name="type" value="${pageMaker.cri.type}">  
+				    <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"> 
+				</form>  
+				
+				<!-- 검색 창 -->
+				<div class="row" style="clear:right;width:500px;margin:auto">
+					<div class="col-lg-12">
+						<form id="searchForm" action="/board/list" method="get">
+							<select name="type">
+								<option value="">전체보기</option>
+								<option value="T">제목</option>
+								<option value="C">내용</option>
+								<option value="W">작성자</option>
+								<option value="TC">제목과 내용</option>
+							</select>
+							<input type="text" name="keyword" value="${pageMaker.cri.keyword}"/>
+							<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+							<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+							<button class="btn btn-primary btn-sm">Search</button>
+						</form>
+					</div>
+				</div>
+
 
 				<!-- Modal 추가 -->
 				<div class="modal" id="myModal">
@@ -147,6 +169,30 @@
 			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
 			actionForm.attr("action", "/board/get");
 			actionForm.submit();
+		});
+		
+		let searchForm = $("#searchForm");
+		
+		$("#searchForm button").on("click",function(e) {
+		    // 화면에서 키워드가 없다면 검색을 하지 않도록 제어
+			if (!searchForm.find("option:selected").val()) {
+				alert("검색종류를 선택하세요");
+				return false;
+			}
+
+			if (!searchForm.find("input[name='keyword']").val()) {
+				alert("키워드를 입력하세요");
+				return false;
+			}
+
+		    // 페이지 번호를 1로 처리
+			searchForm.find("input[name='pageNum']").val("1");
+
+		    // 폼 태그의 전송을 막음
+			e.preventDefault();
+
+			searchForm.submit();
+
 		});
 
 	});

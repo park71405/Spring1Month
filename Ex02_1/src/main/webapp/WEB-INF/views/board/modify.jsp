@@ -18,6 +18,8 @@
 	
 		<input type="hidden" name="pageNum" value="${cri.pageNum}">
 		<input type="hidden" name="amount" value="${cri.amount}"> 
+		<input type="hidden" name="type" value="${cri.type}">
+		<input type="hidden" name="keyword" value="${cri.keyword}">
 
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
@@ -75,11 +77,16 @@
 				
 				let pageNumTag = $("input[name='pageNum']").clone();
 				let amountTag = $("input[name='amount']").clone();
+				let keywordTag = $("input[name='keyword']").clone();
+				let typeTag = $("input[name='type']").clone();
 				
 				formObj.empty();
 				
 				formObj.append(pageNumTag);
 				formObj.append(amountTag);
+				formObj.append(keywordTag);
+				formObj.append(typeTag);
+				
 			}
 			
 			formObj.submit(); //폼 데이터 전송
