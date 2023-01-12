@@ -17,21 +17,36 @@
 	
 	<!-- 댓글 삭제 -->
 	<delete id="delete">
-		delete from tbl_replly where rno = #{rno}
+		delete from tbl_reply where rno = #{rno}
 	</delete>
 	
 	<!-- 댓글 수정 -->
 	<update id="update">
-		update tbl_reply set reply = #{resply}, datedate = sysdate
+		update tbl_reply set reply = #{reply}, updateDate = sysdate
 		where rno = #{rno}
 	</update>
 	
 	<!-- 댓글 목록 페이징 처리 -->
 	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
-		select rno, bno, reply, replyer, replyDate, updatedate
-		from tbl_reply
-		where bno = #{bno}
-		order by rno asc
+		<![CDATA[
+			select rno, bno, reply, replyer, replyDate, updatedate
+			from
+			(
+				select
+				rownum rn, rno, bno, reply, replyer, replyDate, updateDate
+				from tbl_reply
+				where bno = #{bno} and rno > 0
+				and rownum <= #{cri.pageNum} * #{cri.amount}
+			)
+			where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<!-- 해당 게시물의 전체 댓글 수 -->
+	<select id="getcountByBno" resultType="int">
+		<![CDATA[
+			select count(rno) from tbl_reply where bno = #{bno}
+		]]>
 	</select>
 
 </mapper>

@@ -23,4 +23,7 @@ public interface ReplyMapper {
 	//댓글 목록 페이징 처리
 	public List<ReplyVO> getListWithPaging(@Param("cri") Criteria cri, @Param("bno") Long bno);
 	
+	//해당 게시글의 전체 댓글 개수
+	public int getcountByBno(Long bno);
+	
 }

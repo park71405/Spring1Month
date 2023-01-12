@@ -37,6 +37,7 @@
 							<td>
 								<a class="move" href="<c:out value='${board.bno}' />">
 									<c:out value="${board.title}" />
+									<span class="badge badge-secondary">${board.replyCnt}</span>
 								</a>
 							</td>
 							<td><c:out value="${board.writer }"></c:out></td>
